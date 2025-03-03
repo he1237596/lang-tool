@@ -1,10 +1,10 @@
-const fs = require('fs');
+const fs = require('fs-extra');
 const path = require('path');
 const { Parser } = require('json2csv');
 const csv = require('csv-parser');
 
 const languages = ["zh-CN", "zh-Hant", "en-US", "es", "fr", "it", "ja", "kr"];
-const inputPath = path.resolve(__dirname, './source/translations');
+const inputPath = path.resolve(__dirname, './source');
 const outputPath = path.resolve(__dirname, './output');
 
 // 展平嵌套对象的方法，将嵌套结构展平为键路径
@@ -58,12 +58,13 @@ const loadTranslations = (sortedKeys) => {
 
 // JSON 转 CSV
 const jsonToCsv = () => {
+    fs.ensureDirSync(outputPath); // 确保输出目录存在
     const sortedKeys = collectAndSortKeys(); // 获取排序后的键
     const translations = loadTranslations(sortedKeys); // 获取排序后的翻译数据
     const fields = ['key', ...languages]; // 固定字段顺序
     const parser = new Parser({ fields });
     const csvData = parser.parse(translations);
-
+    fs.ensureFileSync(path.join(outputPath, 'translations.csv')); // 确保输出目录存在
     fs.writeFileSync(path.join(outputPath, 'translations.csv'), csvData, 'utf8');
     console.log('JSON 转 CSV 完成');
 };

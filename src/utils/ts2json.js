@@ -2,7 +2,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const langDir = path.resolve( __dirname,'./src/renderer/lang'); // 替换为你的 lang 目录路径
+const langDir = path.resolve( process.cwd(),'./src/lang'); // 替换为你的 lang 目录路径
 const fileNames = []
 async function main() {
     const files = fs.readdirSync(langDir);

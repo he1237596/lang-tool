@@ -135,10 +135,11 @@
       "tb1": "TB-1",
       "tbrs": "TB-RS",
       "gtneo": "GT NEO",
-      "f3": "ZF",
+      "ZF": "ZF",
       "mark1": "ZGT",
       "mark2": "ZS",
-      "markhub": "Neo X"
+      "markhub": "Neo X",
+      "raceOS4": "RaceOS'4"
     },
     "base": {
       "simpro2NoLongerSupportsM10": "SimPro Manager 2 已不再支持 M10",
@@ -198,6 +199,7 @@
       },
       "basicSettings": {
         "title": "基本设定",
+        "basic": "基本",
         "totalForce": "力回馈大小",
         "smoothLevel": "平滑等级",
         "filterLevel": "滤波等级",
@@ -221,9 +223,9 @@
         "torqueLimit": "扭矩限制",
         "centralDamper": "中心阻尼",
         "interpolationLevel": "力回馈倍频",
-        "slowrate": "转矩率",
-        "filterCoefficient": "重构滤波器系数",
-        "electronicPower": "电子助力",
+        "slowrate": "力矩均衡器",
+        "filterCoefficient": "预测滤波器系数",
+        "electronicPower": "转向助力",
         "tooltip": {
           "mechanicalSpring": "增加转向时的回中力，转向角度越大，回中力越大。不建议在模拟游戏中开启此项。",
           "mechanicalDamper": "控制转向时的阻尼，能适度增加轮胎的橡胶感与粘滞感。",
@@ -234,7 +236,7 @@
           "interpolationLevel": "速魔自研零滞后插值算法提升力回馈频率，能提升力回馈频率相对较低的游戏的手感。建议iRacing至少使用2。",
           "confilter_coe": "0表示关闭，预测扭矩行为，同时使模拟器扭矩更新更加平滑，减少低更新率扭矩信号带来的延迟;越大值越平滑，同时与模拟器产生的信号相比，可能会带来超调",
           "frequency": "0表示关闭，起到滤除高频噪声，平滑信号的作用;数值设置越大越平滑，越大可能丢失部分细节但更安静，适当平滑可减少突兀的力回馈输出",
-          "slowrate": "0表示关闭；调节转矩变化率，数值越大，转矩变化斜率越高，细节越好，可能带来一定的噪声；数值越低，驾驶越平顺，但也会丢失一部分细节",
+          "slowrate": "数值越高 力回馈越平滑 柔顺, 适用于过滤与平衡路肩和不平的颠簸路面等其他效果过强烈的游戏, 但不影响抓地感知和细节",
           "staticforce_reduce": "对于大扭矩基座，在转向的时候，可以减少扭矩使驾驶更轻松，同时加强ffb效果的细节"
         }
       },
@@ -243,7 +245,7 @@
         "title": "环形灯设置",
         "breakingAngle": "刹车角度",
         "throttleAngle": "油门角度",
-        "steeringAngle": "方向盘旋转角度"
+        "steeringAngle": "方向盘转向角度"
       }
     },
     "pedals": {
@@ -361,7 +363,8 @@
         "button": "按钮",
         "rotaryKnob": "旋钮",
         "hat7": "7向摇杆",
-        "dashSideLight": "仪表侧灯"
+        "dashSideLight": "仪表侧灯",
+        "indicator": "指示灯"
       },
       "settingsDialog": {
         "title": "方向盘高级设置",
@@ -424,6 +427,7 @@
       "wheelNotSupported": "方向盘不支持切换"
     },
     "telemetry": {
+      "noData": "暂无遥测",
       "undefined": "",
       "info": {
         "rbr": "请确认RSF Launcher中Telemetry选项卡的UDP端口为6776以正常使用遥测。",
@@ -488,7 +492,8 @@
     "disconnected": "未连接",
     "devicesConfig": "设备配置",
     "learnAboutGameTelemetrySupport": "您可以在这里了解游戏数据遥测的支持情况",
-    "theFollowingTestedGameSettingsAreRecommendedForABetterDrivingExperience": "我们推荐您使用此游戏设置以获得更好的体验（双击可放大向导图）"
+    "theFollowingTestedGameSettingsAreRecommendedForABetterDrivingExperience": "我们推荐您使用此游戏设置以获得更好的体验（双击可放大向导图）",
+    "gameConfig": "Game Config"
   },
   "settings": {
     "title": "设置",
@@ -567,7 +572,8 @@
     "devices": "设备",
     "needLogin": "登录",
     "settings": "设置",
-    "faq": "帮助"
+    "faq": "帮助",
+    "telemetry": "遥测"
   },
   "titlebar": {
     "SDBSimagicDeviceServiceException": "SDB速魔设备服务异常",
@@ -578,7 +584,34 @@
     "isRunning": "正在运行"
   },
   "dialog": {
-    "confirmDeletePreset": "您确定要删除它吗?删除后，此预设将不再保存在本地。"
+    "title": {
+      "ADD_GAME_DIALOG": "添加本地游戏",
+      "RPM_LIGHT_GRID_DIALOG": "转速灯设置",
+      "DASH_SELECT_DIALOG": "表盘选择"
+    },
+    "dashSelectDialog": {
+      "allDashes": "表盘设置",
+      "dashesInUse": "使用中表盘"
+    },
+    "addGameDialog": {
+      "gameName": "游戏名称",
+      "gameExecutable": "游戏启动文件",
+      "browse": "浏览",
+      "gameCover": "游戏封面",
+      "browseGameCover": "选择封面",
+      "gameIcon": "游戏图标",
+      "browseIcon": "选择图标",
+      "gameBanner": "游戏横幅",
+      "browseBanner": "选择横幅",
+      "add": "添加",
+      "cancel": "取消"
+    },
+    "fxLightDialog": {
+      "tab": {
+        "staticLight": "灯光",
+        "rpmConfig": "转速灯"
+      }
+    }
   },
   "theme": {
     "simagic": "速魔红",
@@ -649,6 +682,8 @@
     "cancel": "取消",
     "revert": "恢复",
     "noUserPresetHere": "暂无用户预设",
+    "noPreset": "暂无预设",
+    "noSearchResultFound": "暂无搜索结果",
     "importPreset": "导入预设",
     "edited": "已编辑",
     "tagFilter": "筛选分类",
@@ -660,6 +695,10 @@
     "noFilterMatchingResult": "没有匹配的结果",
     "exportAsFile": "导出为文件",
     "importFromFile": "从文件导入",
+    "addFromLocalFile": "本地添加",
+    "PleaseConfirmPersonalPresetChangeTips": "当前预设已修改，是否保存？",
+    "PleaseConfirmPresetChangeTips": "当前预设已修改，是否另存个人预设？",
+    "pleaseConfirmYourPresetChangesBeforeSwitchToAnotherPresetNew": "当前预设有变更，切换预设后，该预设会恢复为变更前状态，是否切换?",
     "pleaseConfirmYourPresetChangesBeforeSwitchToAnotherPreset": "切换其他预设前请确认当前预设变更",
     "back": "返回",
     "savingPresetWillOverwriteYourPreviousSetting": "保存预设将覆盖之前的设置",
@@ -701,7 +740,12 @@
     "mechanicalFriction": "机械摩擦",
     "slowrate": "转矩率",
     "upgradeEquipment": "升级设备",
-    "howToUpgrade": "了解如何升级扭矩"
+    "howToUpgrade": "了解如何升级扭矩",
+    "doUpgrade": "升级扭矩"
+  },
+  "tooltips": {
+    "confirmDelete": "您确定要删除它吗?删除后，此预设将不再保存在本地。",
+    "confirmRevert": "您确定要恢复到更改前的预设吗?"
   },
   "common": {
     "add": "加",
@@ -723,7 +767,7 @@
     "rename": "重命名",
     "current": "当前",
     "angle": {
-      "steering": "方向盘旋转角度",
+      "steering": "方向盘角度",
       "breake": "刹车角度",
       "throttle": "油门角度"
     },
@@ -744,7 +788,54 @@
     "calibration": "校准",
     "wheel": "方向盘",
     "brake": "刹车",
-    "throttle": "油门"
+    "throttle": "油门",
+    "importPersonalPreset": "导入个人预设",
+    "tips": "提示",
+    "personPreset": "个人预设",
+    "savePersonPreset": "保存个人预设",
+    "reset": "重置",
+    "frontView": "正面",
+    "backView": "背面",
+    "knobAbsMode": "绝对值模式",
+    "telemetryList": "遥测列表",
+    "seesawMode": "跷跷板模式",
+    "currentPreset": "当前预设",
+    "presetName": "预设名称",
+    "associatedGameTags": "关联游戏标签",
+    "total": "共",
+    "items": "条",
+    "selectAll": "全选",
+    "selected": "已选",
+    "clearAll": "全部清除",
+    "viewNumericCode": "查看数字编码",
+    "basicInformation": "基本信息",
+    "rpmSetting": "转速灯设置",
+    "sideLightSeting": "侧仪表灯设置",
+    "dashboardSetting": "仪表盘设置",
+    "deviceName": "设备名称",
+    "syncToRacingOS": "同步到Racing OS",
+    "selectedDashboard": "已选中的仪表盘",
+    "clear": "清空",
+    "simagicDashboard": "官方仪表库",
+    "MyDashboard": "我的仪表库",
+    "unit": "个",
+    "dashboard": "仪表",
+    "youCanSelectUpTo10": "最多可选10个",
+    "noDashboard": "暂无选中仪表盘",
+    "rightSelectDashboard": "请从右侧仪表库选择",
+    "eventCategory": "赛事类别",
+    "dashboardDetailSize": "仪表盘详情",
+    "dashboardSource": "仪表盘来源",
+    "dashboardScreenName": "仪表盘屏幕名称",
+    "applicableRaceCategories": "适用赛事类别",
+    "applicableScenarios": "适用场景",
+    "telemetryInformation": "遥测信息",
+    "addBtn": "添加"
+  },
+  "sm_dialog": {
+    "confirmDeletePreset": "您确定要删除它吗?删除后，此预设将不再保存在本地。",
+    "saveAsPersonalPreset": "另存为个人预设",
+    "afterSaveTip": "确认保存后，请在【个人预设】中查看预设详情"
   },
   "message": {
     "saveSuccess": "保存成功",
@@ -758,13 +849,19 @@
     "revertSuccess": "恢复成功",
     "revertSuccessDesc": "成功恢复为默认预设",
     "revertFailed": "恢复失败",
-    "revertFailedDesc": "无法恢复为默认预设"
+    "revertFailedDesc": "无法恢复为默认预设",
+    "operationSuccessful": "操作成功",
+    "operationFailed": "操作失败",
+    "importSuccess": "导入成功",
+    "importFailed": "导入失败",
+    "exportSuccess": "导出成功",
+    "exportFailed": "导出失败"
   },
   "label": {
     "selectScene": "请选择应用场景",
-    "lightEffectMode": "设置灯效模式",
-    "focusAreaColor": "设置焦点区域颜色",
+    "lightEffectMode": "灯光效果",
     "followColor": "跟随颜色",
+    "lightColor": "灯光颜色",
     "modeFollow": "跟随",
     "modeSingle": "单色",
     "modeBreath": "呼吸",
@@ -776,5 +873,108 @@
     "speedVeryFast": "非常快",
     "rotate": "请转动",
     "stepOn": "请踩下"
+  },
+  "input": {
+    "inputPresetNameTip": "请输入个人预设名称",
+    "placeholder": "请输入15字符以内的预设名称"
+  },
+  "screen": {
+    "adsorb": "吸附",
+    "rpm": "RPM",
+    "redline": "Redline"
+  },
+  "telemetry": {
+    "support": "支持",
+    "singleSelect": "单选",
+    "and": "和",
+    "boxSelect": "框选",
+    "alwaysOn": "常亮",
+    "blink": "闪烁",
+    "blinkingColor": "闪烁颜色",
+    "blinkingDelay": "闪烁延迟",
+    "rpmUnit": "转速单位",
+    "speedSettings": "速度设置",
+    "value": "数值",
+    "speedHint": "到达对应数值时，灯会亮起。",
+    "minimumSpeed": "最小速度",
+    "maximumSpeed": "最大速度",
+    "speedWarning": "速度预警",
+    "fuelMode": "油量模式",
+    "suggestion": "建议",
+    "or": "或",
+    "minimumPercentage": "最小百分比",
+    "maximumPercentage": "最大百分比",
+    "percentage": "百分比",
+    "fuelWarning": "油量预警",
+    "brakeHint": "基于所选灯光颜色和位置，刹车行程跟随",
+    "standardColors": "标准颜色",
+    "rpmSettingTip": "可通过手动输入、拖拽滑动条或者鼠标滚轮来改变转速灯数值",
+    "gearMode": "档位模式",
+    "label": {
+      "STATIC_EFFECT": "静态效果",
+      "PIT_LIMITER": "维修区限速器",
+      "IS_IN_PIT": "在维修区",
+      "ABS_ACTIVE": "ABS触发",
+      "ABS triggered": "防抱死系统已触发",
+      "TC enabled": "牵引力控制已启用",
+      "TC_ACTIVE": "牵引力控制触发",
+      "DRS_ON": "DRS状态",
+      "LEFT_INDICATOR": "左转向灯",
+      "RIGHT_INDICATOR": "右转向灯",
+      "LEFT_CAR_SPOTTER": "左侧有无其他车辆",
+      "RIGHT_CAR_SPOTTER": "右侧有无其他车辆",
+      "FLAG_BLACK": "黑旗",
+      "FLAG_BLUE": "蓝旗",
+      "FLAG_GREEN": "绿旗",
+      "FLAG_RED": "红旗",
+      "FLAG_WHITE": "白旗",
+      "FLAG_YELLOW": "黄旗",
+      "FLAG_CHECKERED": "方格旗",
+      "ENGINE_IGNITION_ON": "引擎通电是否开启",
+      "ENGINE_STARTED": "引擎是否启动",
+      "FFB_CLIPPING": "力回馈裁剪",
+      "GEAR": "档位",
+      "RPM": "转速",
+      "RPM_REDLINE": "转速红线",
+      "SPEED": "时速",
+      "FUEL": "燃油",
+      "THROTTLE": "油门",
+      "BRAKE": "刹车",
+      "CLUTCH": "离合",
+      "HAND_BRAKE": "手刹"
+    },
+    "tooltip": {
+      "STATIC_EFFECT": "设备默认的静态灯光效果",
+      "PIT_LIMITER": "激活维修区限速器时触发灯效",
+      "IS_IN_PIT": "车辆进入维修区范围时触发的灯效",
+      "ABS_ACTIVE": "ABS处于开启状态触发灯效",
+      "ABS triggered": "车辆刹车时ABS介入，触发灯效",
+      "TC enabled": "牵引力控制系统已开启",
+      "TC_ACTIVE": "车辆加速时TC介入，触发灯效",
+      "DRS_ON": "激活DRS时触发灯效",
+      "LEFT_INDICATOR": "打开左转向灯触发灯效",
+      "RIGHT_INDICATOR": "打开右转向灯触发灯效",
+      "LEFT_CAR_SPOTTER": "左侧检测到车辆触发灯效",
+      "RIGHT_CAR_SPOTTER": "右侧检测到车辆触发灯效",
+      "FLAG_BLACK": "游戏中收到黑旗信号",
+      "FLAG_BLUE": "游戏中收到蓝旗信号",
+      "FLAG_GREEN": "游戏中收到绿旗信号",
+      "FLAG_RED": "游戏中收到红旗信号",
+      "FLAG_WHITE": "游戏中收到白旗信号",
+      "FLAG_YELLOW": "游戏中收到黄旗信号",
+      "FLAG_CHECKERED": "游戏中收到方格旗信号",
+      "ENGINE_IGNITION_ON": "发动机点火时触发灯效",
+      "ENGINE_STARTED": "发动机启动完成时触发灯效",
+      "FFB_CLIPPING": "力反馈信号过载触发信号",
+      "GEAR": "档位变化时更新灯效",
+      "RPM": "根据当前RPM动态调整灯效",
+      "RPM_REDLINE": "引擎转速接近或达到红线区域",
+      "SPEED": "根据速度动态调整灯效设置",
+      "FUEL": "燃料低于预设值时触发",
+      "THROTTLE": "根据油门位置动态调整灯效",
+      "BRAKE": "根据刹车压力动态调整灯效",
+      "CLUTCH": "根据离合器位置动态调整灯效",
+      "HAND_BRAKE": "手刹激活时触发灯效"
+    }
   }
 }

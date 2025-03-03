@@ -1,10 +1,10 @@
-const fs = require('fs');
+const fs = require('fs-extra');
 const path = require('path');
 const csv = require('csv-parser');
 
 const languages = ["zh-CN", "zh-Hant", "en-US", "es", "fr", "it", "ja", "kr"];
 const inputPath = path.resolve(__dirname, './source');
-const outputPath = path.resolve(__dirname, './output');
+const outputPath = path.resolve(process.cwd(), './src/output');
 
 // 展平嵌套对象的方法
 const flattenObject = (obj, parent = '', res = {}) => {
@@ -53,6 +53,7 @@ const sortKeys = (obj) => {
 
 const csvToJson = () => {
     const results = [];
+    fs.ensureDirSync(outputPath)
     fs.createReadStream(path.join(outputPath, 'translations.csv'))
         .pipe(csv())
         .on('data', (data) => results.push(data))
@@ -60,14 +61,15 @@ const csvToJson = () => {
             languages.forEach(lang => {
                 const translation = {};
                 results.forEach(row => {
-                    if (row[lang]) {
+                    // if (row[lang]) {
                         translation[row.key] = row[lang];
                         // const unflattenedData = unflattenObject({ [row.key]: row[lang] });
                         // Object.assign(translation, unflattenedData);
-                    }
+                    // }
                 });
                 const sortedTranslation = sortKeys(translation);
-                fs.writeFileSync(path.join(inputPath, `/test/${lang}.json`), JSON.stringify(sortedTranslation, null, 2), 'utf8');
+                fs.ensureFileSync(path.join(outputPath, `/json/${lang}.json`));
+                fs.writeFileSync(path.join(outputPath, `/json/${lang}.json`), JSON.stringify(sortedTranslation, null, 2), 'utf8');
                 console.log(`${lang}.json 已成功写入`);
             });
             console.log('CSV 转回 JSON 完成');
