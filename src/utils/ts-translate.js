@@ -1,8 +1,9 @@
 /* simpro ts to json */
 const fs = require('fs');
 const path = require('path');
-
+// 到smipor用
 const langDir = path.resolve( __dirname,'./src/lang'); // 替换为你的 lang 目录路径
+const targetDir = path.resolve( __dirname,'./src/locales'); // 替换为你的 lang 目录路径
 const fileNames = []
 async function main() {
     const files = fs.readdirSync(langDir);
@@ -15,7 +16,7 @@ async function main() {
             const translations = require(filePath).default;
 
             // 写入对应的 JSON 文件
-            const jsonFilePath = path.join(langDir, `translations/${path.basename(file, '.ts')}.json`);
+            const jsonFilePath = path.join(targetDir, `translations/${path.basename(file, '.ts')}.json`);
             fs.writeFileSync(jsonFilePath, JSON.stringify(translations, null, 2));
 
             console.log(`已写入: ${jsonFilePath}`);
