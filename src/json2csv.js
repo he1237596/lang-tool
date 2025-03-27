@@ -1,4 +1,4 @@
-const fs = require('fs-extra');
+const fse = require('fs-extra');
 const path = require('path');
 const { Parser } = require('json2csv');
 const csv = require('csv-parser');
@@ -28,7 +28,7 @@ const collectAndSortKeys = () => {
 
     languages.forEach(lang => {
         const filePath = path.join(inputPath, `${lang}.json`);
-        const jsonData = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+        const jsonData = JSON.parse(fse.readFileSync(filePath, 'utf8'));
         const flattenedData = flattenObject(jsonData);
         Object.keys(flattenedData).forEach(key => {
             allKeys.add(key); // 收集所有 key
@@ -46,7 +46,7 @@ const loadTranslations = (sortedKeys) => {
         const row = { key }; // 初始化每一行翻译数据
         languages.forEach(lang => {
             const filePath = path.join(inputPath, `${lang}.json`);
-            const jsonData = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+            const jsonData = JSON.parse(fse.readFileSync(filePath, 'utf8'));
             const flattenedData = flattenObject(jsonData);
             row[lang] = flattenedData[key] || ''; // 填充翻译，没有的补空字符串
         });
@@ -58,14 +58,25 @@ const loadTranslations = (sortedKeys) => {
 
 // JSON 转 CSV
 const jsonToCsv = () => {
-    fs.ensureDirSync(outputPath); // 确保输出目录存在
+    fse.ensureDirSync(outputPath); // 确保输出目录存在
     const sortedKeys = collectAndSortKeys(); // 获取排序后的键
     const translations = loadTranslations(sortedKeys); // 获取排序后的翻译数据
     const fields = ['key', ...languages]; // 固定字段顺序
     const parser = new Parser({ fields });
     const csvData = parser.parse(translations);
-    fs.ensureFileSync(path.join(outputPath, 'translations.csv')); // 确保输出目录存在
-    fs.writeFileSync(path.join(outputPath, 'translations.csv'), csvData, 'utf8');
+    // console.log('translations:', translations);
+    const res = translations.map((row) => {
+      const item = {
+        keyName: row.key,
+        // description,
+        translations: languages.map(lang=>({ language: lang, value: row[lang] }))
+      }
+      return item;
+    })
+    fse.ensureFileSync(path.join(__dirname, 'temp.json')); // 确保输出目录存在
+    fse.writeJsonSync(path.join(__dirname, 'temp.json'), res);
+    fse.ensureFileSync(path.join(outputPath, 'translations.csv')); // 确保输出目录存在
+    fse.writeFileSync(path.join(outputPath, 'translations.csv'), csvData, 'utf8');
     console.log('JSON 转 CSV 完成');
 };
 
@@ -91,7 +102,7 @@ const unflattenObject = (data) => {
 // CSV 转回 JSON
 const csvToJson = () => {
     const results = [];
-    fs.createReadStream(path.join(outputPath, 'translations.csv'))
+    fse.createReadStream(path.join(outputPath, 'translations.csv'))
         .pipe(csv())
         .on('data', (data) => results.push(data))
         .on('end', () => {
@@ -104,7 +115,7 @@ const csvToJson = () => {
                 });
                 const sortedTranslation = sortKeys(translation); // 保证排序一致
                 const unflattenedTranslation = unflattenObject(sortedTranslation); // 恢复嵌套结构
-                fs.writeFileSync(path.join(inputPath, `/test/${lang}.json`), JSON.stringify(unflattenedTranslation, null, 2), 'utf8');
+                fse.writeFileSync(path.join(inputPath, `/test/${lang}.json`), JSON.stringify(unflattenedTranslation, null, 2), 'utf8');
                 console.log(`${lang}.json 已成功写入`);
             });
             console.log('CSV 转回 JSON 完成');
