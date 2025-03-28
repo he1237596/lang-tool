@@ -1,6 +1,10 @@
 const fs = require('fs-extra');
 const path = require('path');
 const csv = require('csv-parser');
+const { pinyin } = require("pinyin");
+const _ = require("lodash");
+// const iconv = require('iconv-lite');
+const xlsx = require('xlsx');
 
 const languages = ["zh-CN", "zh-Hant", "en-US", "es", "fr", "it", "ja", "kr"];
 const inputPath = path.resolve(__dirname, './source');
@@ -50,7 +54,14 @@ const sortKeys = (obj) => {
     });
     return sorted;
 };
-
+function toCamelCase(text) {
+    if (/[\u4e00-\u9fa5]/.test(text)) {
+      // 如果是中文，转换为拼音
+      const pinyinArray = pinyin(text, { style: pinyin.STYLE_NORMAL });
+      text = pinyinArray.flat().join(" ");
+    }
+    return _.camelCase(text);
+}
 const csvToJson = () => {
     const results = [];
     fs.ensureDirSync(outputPath)
@@ -78,6 +89,52 @@ const csvToJson = () => {
             console.error('读取 CSV 文件时出错:', err);
         });
 };
+// 解析 Excel 文件并转换为 JSON
+const excelToJson = () => {
+    const filePath = path.join(outputPath, 'translations.xlsx'); // 读取 Excel 文件
+    if (!fs.existsSync(filePath)) {
+        console.error('找不到 Excel 文件');
+        return;
+    }
+
+    const workbook = xlsx.readFile(filePath);
+    const sheetName = workbook.SheetNames[0]; // 取第一张表
+    const sheet = xlsx.utils.sheet_to_json(workbook.Sheets[sheetName]);
+
+    fs.ensureDirSync(outputPath);
+
+    languages.forEach(lang => {
+        const translation = {};
+        sheet.forEach(row => {
+            let rowKey = row.key;
+            // console.log(rowKey);
+            if (!rowKey) {
+                // console.log(row)
+                console.log('key 不存在：', rowKey, '转换后：', toCamelCase(row['zh-CN'] || row['en-US']), '原始：', row[lang], '语言：', lang);
+                rowKey = toCamelCase(row['zh-CN'] || row['en-US'])
+            }
+
+            if (rowKey) {
+               translation[rowKey] = row[lang] || '';
+               if(!row.key) {
+                console.log(row[lang])
+               }
+            }
+        });
+
+        const sortedTranslation = sortKeys(translation);
+        // const unflattenedTranslation = unflattenObject(sortedTranslation);
+
+        const outputFilePath = path.join(outputPath, `json/${lang}.json`);
+        fs.ensureFileSync(outputFilePath);
+        // fs.writeJsonSync(outputFilePath, unflattenedTranslation, { spaces: 2 });
+        fs.writeJsonSync(outputFilePath, sortedTranslation, { spaces: 2 });
+        console.log(`${lang}.json 已成功写入`);
+    });
+
+    console.log('Excel 转 JSON 完成');
+};
 
 // 执行转换
-csvToJson(); // 执行 CSV 转 JSON
+// csvToJson(); // 执行 CSV 转 JSON
+excelToJson(); // 执行 Excel 转 JSON

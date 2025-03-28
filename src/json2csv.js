@@ -2,6 +2,7 @@ const fse = require('fs-extra');
 const path = require('path');
 const { Parser } = require('json2csv');
 const csv = require('csv-parser');
+const XLSX = require('xlsx');
 
 const languages = ["zh-CN", "zh-Hant", "en-US", "es", "fr", "it", "ja", "kr"];
 const inputPath = path.resolve(__dirname, './source');
@@ -80,6 +81,24 @@ const jsonToCsv = () => {
     console.log('JSON 转 CSV 完成');
 };
 
+const jsonToExcel = () => {
+    fse.ensureDirSync(outputPath); // 确保输出目录存在
+    const sortedKeys = collectAndSortKeys(); // 获取排序后的键
+    const translations = loadTranslations(sortedKeys); // 获取排序后的翻译数据
+
+    // 生成工作簿（Workbook）
+    const ws = XLSX.utils.json_to_sheet(translations, { header: ['key', ...languages] });
+
+    // 创建 Excel 文件
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "Translations");
+
+    // 写入 Excel 文件
+    const excelPath = path.join(outputPath, 'translations.xlsx');
+    XLSX.writeFile(wb, excelPath);
+
+    console.log('JSON 转 Excel 完成:', excelPath);
+};
 // CSV 转回 JSON，处理嵌套结构
 const unflattenObject = (data) => {
     const result = {};
@@ -139,5 +158,6 @@ const sortKeys = (obj) => {
 };
 
 // 执行转换
-jsonToCsv();  // 执行 JSON 转 CSV
+// jsonToCsv();  // 执行 JSON 转 CSV
 // csvToJson(); // 执行 CSV 转 JSON
+jsonToExcel();
