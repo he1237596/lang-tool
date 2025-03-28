@@ -136,10 +136,12 @@
       "tbrs": "TB-RS",
       "gtneo": "GT NEO",
       "ZF": "ZF",
-      "mark1": "ZGT",
-      "mark2": "ZS",
+      "ZGT": "ZGT",
+      "ZS": "ZS",
       "markhub": "Neo X",
-      "raceOS4": "RaceOS'4"
+      "raceOS4": "RaceOS'4",
+      "raceOS3": "RaceOS'3",
+      "mark750": "Mark750"
     },
     "base": {
       "simpro2NoLongerSupportsM10": "SimPro Manager 2 已不再支持 M10",
@@ -223,8 +225,8 @@
         "torqueLimit": "扭矩限制",
         "centralDamper": "中心阻尼",
         "interpolationLevel": "力回馈倍频",
-        "slowrate": "力矩均衡器",
-        "filterCoefficient": "预测滤波器系数",
+        "slowrate": "转矩变化率",
+        "filterCoefficient": "动态预测等级",
         "electronicPower": "转向助力",
         "tooltip": {
           "mechanicalSpring": "增加转向时的回中力，转向角度越大，回中力越大。不建议在模拟游戏中开启此项。",
@@ -234,9 +236,9 @@
           "torqueLimit": "为基座设定最大输出扭矩，设定扭矩之下的所有力回馈细节都将保留，超过的部分将被裁切。对于大扭矩基座，通过限制扭矩大小，能够在不损失正常驾驶力回馈表现的同时，裁切掉撞车或失控时越过峰值的输出，有一定防打手的作用。",
           "centralDamper": "开启后，随车速增加，会使方向盘变重，令中心区的手感更扎实。（需遥测支持）",
           "interpolationLevel": "速魔自研零滞后插值算法提升力回馈频率，能提升力回馈频率相对较低的游戏的手感。建议iRacing至少使用2。",
-          "confilter_coe": "0表示关闭，预测扭矩行为，同时使模拟器扭矩更新更加平滑，减少低更新率扭矩信号带来的延迟;越大值越平滑，同时与模拟器产生的信号相比，可能会带来超调",
+          "confilter_coe": "动态预测等级用于根据之前时刻的游戏数据(如车辆速度、转向角度、路面反馈等)，预测下一次游戏中的车辆状态和力反馈状态。通过提前计算和模拟能够优化力反馈的动态响应，显著缩短力反馈的延时(\"注: 此参数等级过高可能会产生较大的噪音或震动\") ",
           "frequency": "0表示关闭，起到滤除高频噪声，平滑信号的作用;数值设置越大越平滑，越大可能丢失部分细节但更安静，适当平滑可减少突兀的力回馈输出",
-          "slowrate": "数值越高 力回馈越平滑 柔顺, 适用于过滤与平衡路肩和不平的颠簸路面等其他效果过强烈的游戏, 但不影响抓地感知和细节",
+          "slowrate": "转矩变化率用于调节系统力反馈信号的动态响应速度(即Slew Rate)，通过控制信号变化的速率优化力反馈的平滑性和实时性。数值越高 力回馈越平滑 柔顺, 适用于过滤路肩和不平的颠簸路面等其他效过于强烈的游戏, 但不影响抓地感知和细节(0=无限制)",
           "staticforce_reduce": "对于大扭矩基座，在转向的时候，可以减少扭矩使驾驶更轻松，同时加强ffb效果的细节"
         }
       },
@@ -493,7 +495,11 @@
     "devicesConfig": "设备配置",
     "learnAboutGameTelemetrySupport": "您可以在这里了解游戏数据遥测的支持情况",
     "theFollowingTestedGameSettingsAreRecommendedForABetterDrivingExperience": "我们推荐您使用此游戏设置以获得更好的体验（双击可放大向导图）",
-    "gameConfig": "Game Config"
+    "gameConfig": "Game Config",
+    "gameConfigSuccess": "一键适配已完成",
+    "gameConfigFailed": "一键适配失败",
+    "telemetryHelperSuccess": "遥测启用成功",
+    "telemetryHelperFailed": "遥测启用失败"
   },
   "settings": {
     "title": "设置",
@@ -814,7 +820,7 @@
     "dashboardSetting": "仪表盘设置",
     "deviceName": "设备名称",
     "syncToRacingOS": "同步到Racing OS",
-    "selectedDashboard": "已选中的仪表盘",
+    "selectedDashboard": "选中的仪表",
     "clear": "清空",
     "simagicDashboard": "官方仪表库",
     "MyDashboard": "我的仪表库",

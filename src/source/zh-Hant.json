@@ -128,9 +128,12 @@
       "tb1": "TB-1",
       "tbrs": "TB-RS",
       "ZF": "ZF",
-      "mark1": "ZGT",
-      "mark2": "ZS",
-      "markhub": "Neo X"
+      "ZGT": "ZGT",
+      "ZS": "ZS",
+      "markhub": "Neo X",
+      "raceOS3": "RaceOS'3",
+      "raceOS4": "RaceOS'4",
+      "mark750": "Mark750"
     },
     "connection": {
       "status": {
@@ -225,8 +228,8 @@
         "torqueLimit": "扭矩限制",
         "centralDamper": "中心阻尼",
         "interpolationLevel": "力回饋倍頻",
-        "slowrate": "力矩均衡器",
-        "filterCoefficient": "預測濾波器係數",
+        "slowrate": "Slew Rate Control",
+        "filterCoefficient": "Dynamic Prediction Level",
         "electronicPower": "轉向助力",
         "tooltip": {
           "mechanicalSpring": "增加轉向時的回中力，轉向角度越大，回中力越大。不建議在模擬遊戲中開啟此項。",
@@ -236,10 +239,10 @@
           "torqueLimit": "為基座設定最大輸出扭矩，設定扭矩之下的所有力回饋細節都將保留，超過的部分將被裁切。對於大扭力基座，透過限制扭力大小，能夠在不損失正常駕駛力回饋表現的同時，裁切掉撞車或失控時越過峰值的輸出，有一定防打手的作用。",
           "centralDamper": "開啟後，隨車速增加，會使方向盤變重，令中心區的手感更紮實。 （需遙測支援）",
           "interpolationLevel": "速魔自研零滯後插值演算法提升力回饋頻率，能提升力回饋頻率相對較低的遊戲的手感。建議iRacing至少使用2。",
-          "confilter_coe": "0 表示關閉，預測扭矩行為，同時使模擬器扭矩更新更加平滑，減少低更新率扭矩信號帶來的延遲；值越大越平滑，但相比模擬器生成的信號，可能會帶來超調。",
+          "confilter_coe": "The Dynamic Prediction Level is designed to predict the next state of the vehicle and force feedback in the game based on data from previous moments (such as vehicle speed, steering angle, road surface feedback, etc,). By pre-calculating and simulating to optimizes the response of force feedback(\"Note: Value too high may causing noise or high frequency vibration\")",
           "frequency": "0 表示關閉，起到濾除高頻噪聲和平滑信號的作用；數值設置越大越平滑，但過大可能丟失部分細節但更加安靜，適當的平滑可減少突兀的力回饋輸出。",
-          "slowrate": "數值越高，力回饋越平滑、柔順，適用於過濾與平衡路肩和不平的顛簸路面等效果過於強烈的遊戲，但不影響抓地感知和細節。",
-          "staticforce_reduce": "對於大扭矩基座，在轉向時可以減少扭矩，使駕駛更加輕鬆，同時增強力回饋效果的細節。"
+          "slowrate": "Slew Rate Control is used to adjust the dynamic response speed of the force feedback signal in the system. By controlling the rate of signal changes, it optimizes the smoothness and real-time performance of force feedback.Higher settings gives smoother FFB, for balancing too strong and sharp kerbs or bumps effects but won't affect grip and details on hand (0=no limits)",
+          "staticforce_reduce": "減弱彎道中持續的力矩但不會影響手感和路面細節。"
         }
       },
       "ringLight": {
@@ -496,6 +499,8 @@
     "learnAboutGameTelemetrySupport": "您可以在這裡了解遊戲數據遙測的支援情況",
     "theFollowingTestedGameSettingsAreRecommendedForABetterDrivingExperience": "我們推薦您使用此遊戲設定以獲得更好的體驗（按兩下可放大精靈圖）",
     "gameConfig": "Game Config",
+    "gameConfigSuccess": "一鍵適配已完成",
+    "gameConfigFailed": "一鍵適配失敗",
     "config": {
       "autoSwitchPreset": "自動切換預設",
       "unselected": "未選擇",
@@ -805,7 +810,7 @@
     "frontView": "正面",
     "backView": "背面",
     "knobAbsMode": "绝对值模式",
-    "telemetryList": "遥测列表",
+    "telemetryList": "遙測列表",
     "seesawMode": "跷跷板模式",
     "currentPreset": "当前预设",
     "viewNumericCode": "查看數字編碼",

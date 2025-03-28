@@ -205,8 +205,8 @@
         "interpolationLevel": "Fréquence de retour d'information",
         "mechanicalInertia": "Inertie Mécanique",
         "torqueLimit": "Couple maximum",
-        "slowrate": "Égaliseur de force",
-        "filterCoefficient": "Filtre de prédiction de force",
+        "slowrate": "Slew Rate Control",
+        "filterCoefficient": "Dynamic Prediction Level",
         "electronicPower": "Assistance de couple de direction",
         "tooltip": {
           "mechanicalSpring": "Ajoute une force de ressort constante utilisée pour centrer la roue (0=OFF). Des valeurs plus élevées augmentent l'intensité de cet effet. Il n'est PAS recommandé d'utiliser ce paramètre lors de l'utilisation d'un direct drive.",
@@ -216,10 +216,10 @@
           "torqueLimit": "Couple maximum de la base (100%=OFF). Tous les détails du retour de force en dessous du seuil fixé sont préservés, tout ce qui est au-dessus du seuil fixé sera supprimé. Limiter le couple maximum sur un direct drive à couple élevé vous permettra de conserver un retour de force correct tout en vous protégeant des accidents soudains dus à un couple élevé ou des pics de FFB.",
           "centralDamper": "Lorsque la vitesse du véhicule augmente, le volant devient plus lourd et plus stable près du centre (support télémétrique requis), ce qui réduit les oscillations lors de la conduite à vitesse élevée. Des valeurs plus élevées augmentent l'intensité de cet effet (0=OFF).",
           "interpolationLevel": "L'algorithme de suréchantillonnage SIMAGIC Zero Latency FFB convertit les signaux de retour de force à basse fréquence en signaux de haute qualité produisant un retour de force plus doux et plus détaillé par rapport aux basses fréquences. Des valeurs plus élevées augmentent la force de cet effet, (0=OFF).",
-          "confilter_coe": "0 indique l'arrêt, prédisant le comportement du couple tout en rendant les mises à jour du couple du simulateur plus fluides et en réduisant les retards causés par les signaux de couple à faible taux de mise à jour. Plus la valeur est élevée, plus c'est fluide, mais cela peut entraîner un dépassement par rapport aux signaux générés par le simulateur.",
+          "confilter_coe": "The Dynamic Prediction Level is designed to predict the next state of the vehicle and force feedback in the game based on data from previous moments (such as vehicle speed, steering angle, road surface feedback, etc,). By pre-calculating and simulating to optimizes the response of force feedback(\"Note: Value too high may causing noise or high frequency vibration\")",
           "frequency": "0 indique l'arrêt, avec pour fonction de filtrer les bruits haute fréquence et de lisser le signal. Plus la valeur est élevée, plus le signal devient fluide, mais une valeur trop grande peut entraîner la perte de certains détails tout en le rendant plus silencieux. Un lissage approprié peut réduire les retours de force brusques.",
-          "slowrate": "Des valeurs plus élevées offrent un retour de force plus fluide et souple, idéal pour filtrer et équilibrer des effets trop forts de bordures et de surfaces irrégulières dans certains jeux, sans altérer la perception de l’adhérence et des détails.",
-          "staticforce_reduce": "Pour les bases à fort couple, le couple peut être réduit lors de la direction pour rendre la conduite plus facile, tout en améliorant les détails de l'effet de retour de force (FFB)."
+          "slowrate": "Slew Rate Control is used to adjust the dynamic response speed of the force feedback signal in the system. By controlling the rate of signal changes, it optimizes the smoothness and real-time performance of force feedback.Higher settings gives smoother FFB, for balancing too strong and sharp kerbs or bumps effects but won't affect grip and details on hand (0=no limits)",
+          "staticforce_reduce": "Réduit la force continue dans les virages, sans affecter la maniabilité ni les détails de la route."
         }
       },
       "ringLight": {
@@ -389,9 +389,12 @@
       "tbrs": "TB-RS",
       "gtneo": "GT NEO",
       "ZF": "ZF",
-      "mark1": "ZGT",
-      "mark2": "ZS",
-      "markhub": "Neo X"
+      "ZGT": "ZGT",
+      "ZS": "ZS",
+      "markhub": "Neo X",
+      "raceOS3": "RaceOS'3",
+      "raceOS4": "RaceOS'4",
+      "mark750": "Mark750"
     },
     "shifter": {
       "forceFirmwareUpdateText": "SimPro2 nécessite un micrologiciel de levier de vit. plus récent pour fonctionner",
@@ -497,7 +500,9 @@
     "devicesConfig": "Configuration des périphérique",
     "learnAboutGameTelemetrySupport": "En savoir plus sur la télémétrie du jeu",
     "theFollowingTestedGameSettingsAreRecommendedForABetterDrivingExperience": "Les paramètres suivants du jeu sont recommandés pour une meilleure expérience de conduite(Double-cliquez pour zoomer sur l’image du guide)",
-    "gameConfig": "Game Config"
+    "gameConfig": "Game Config",
+    "gameConfigSuccess": "Adaptation en un clic terminée",
+    "gameConfigFailed": "Adaptation en un clic échouée"
   },
   "settings": {
     "title": "Réglages",
@@ -817,7 +822,8 @@
     "youCanSelectUpTo10": "Vous pouvez en sélectionner jusqu'à 10",
     "noDashboard": "Aucun tableau de bord sélectionné",
     "rightSelectDashboard": "Veuillez en choisir un dans la bibliothèque de tableaux de bord à droite",
-    "addBtn": "Ajouter"
+    "addBtn": "Ajouter",
+    "telemetryList": "Liste de télémétrie"
   },
   "label": {
     "selectScene": "Veuillez sélectionner le scénario d'application",

@@ -233,8 +233,8 @@
         "interpolationLevel": "補間レベル",
         "mechanicalInertia": "メカニカル慣性",
         "torqueLimit": "最大トルク",
-        "slowrate": "フォースイコライザー",
-        "filterCoefficient": "予測フィルター係数",
+        "slowrate": "Slew Rate Control",
+        "filterCoefficient": "Dynamic Prediction Level",
         "electronicPower": "ステアリングトルクアシスト",
         "tooltip": {
           "mechanicalSpring": "ホイールのセンター出しに使用される一定のバネ力を加えられます（0 = OFF）。値が高いほど、この効果が強くなります。ダイレクトドライブのホイールベースを使用する場合は、この設定を使用しないことをおすすめします。",
@@ -244,10 +244,10 @@
           "torqueLimit": "ベースの最大トルクしきい値を設定できます（100% = OFF）。設定されたしきい値以下のすべてのフォースフィードバックの内容は維持され、設定されたしきい値以上のものは切り取られます。高トルクホイールベースの最大トルクを制限することで、急な高トルククラッシュやFFBピーク値からユーザーを保護しながら、適切なフォースフィードバックを維持することができます。",
           "centralDamper": "車速が上がるとステアリングホイールが重くなり、センター付近が安定するため（テレメトリのサポートが必要）、スピード走行時の振動が軽減されます。値が大きいほど、この効果が強くなります（0＝OFF）。",
           "interpolationLevel": "SIMAGIC Zero Latency FFB Upsampling Algorithm は、低周波のフォースフィードバック信号を高品質な信号に変換し、低周波に比べてより滑らかで詳細なフォースフィードバックを生成します。値が高いほど、この効果は強くなります。",
-          "confilter_coe": "0はオフを示し、トルクの動作を予測しながら、シミュレーターのトルク更新をより滑らかにし、低更新レートのトルク信号による遅延を減らします。値が大きいほど滑らかになりますが、シミュレーターが生成する信号と比較してオーバーシュートが発生する可能性があります。",
+          "confilter_coe": "The Dynamic Prediction Level is designed to predict the next state of the vehicle and force feedback in the game based on data from previous moments (such as vehicle speed, steering angle, road surface feedback, etc,). By pre-calculating and simulating to optimizes the response of force feedback(\"Note: Value too high may causing noise or high frequency vibration\")",
           "frequency": "0はオフを示し、高周波ノイズを除去し、信号をスムーズにする役割を果たします。値が大きいほど信号は滑らかになりますが、あまりに大きいと一部の細部が失われる可能性があり、より静かになります。適度なスムージングは、突然の力フィードバックの出力を軽減することができます。",
-          "slowrate": "数値が高いほど、力フィードバックがより滑らかで柔らかくなり、縁石や凸凹した路面の過度な効果をバランス調整するのに適していますが、グリップ感と細かいディテールには影響しません。",
-          "staticforce_reduce": "大トルクベースでは、ステアリング時にトルクを減少させることで運転をより軽くし、同時にフォースフィードバック（FFB）の効果の細部を強化できます。"
+          "slowrate": "Slew Rate Control is used to adjust the dynamic response speed of the force feedback signal in the system. By controlling the rate of signal changes, it optimizes the smoothness and real-time performance of force feedback.Higher settings gives smoother FFB, for balancing too strong and sharp kerbs or bumps effects but won't affect grip and details on hand (0=no limits)",
+          "staticforce_reduce": "カーブ中の持続的なトルクを弱めますが、操作感や路面の詳細には影響しません。"
         }
       },
       "ringLight": {
@@ -417,9 +417,12 @@
       "tb1": "TB 1",
       "tbrs": "TB-RS",
       "ZF": "ZF",
-      "mark1": "ZGT",
-      "mark2": "ZS",
-      "markhub": "Neo X"
+      "ZGT": "ZGT",
+      "ZS": "ZS",
+      "markhub": "Neo X",
+      "raceOS3": "RaceOS'3",
+      "raceOS4": "RaceOS'4",
+      "mark750": "Mark750"
     },
     "shifter": {
       "button": "ボタン",
@@ -453,6 +456,8 @@
     "learnAboutGameTelemetrySupport": "ゲームテレメトリサポートについて",
     "theFollowingTestedGameSettingsAreRecommendedForABetterDrivingExperience": "より良いドライビング体験のために、以下のゲーム設定を推奨します（ダブルクリックして下絵にズームインします）",
     "gameConfig": "Game Config",
+    "gameConfigSuccess": "ワンクリック適合が完了しました",
+    "gameConfigFailed": "ワンクリック適合が失敗しました",
     "telemetryRefresh": "テレメトリーパッチ",
     "telemetryRefreshEnabled": "テレメトリは有効になりました",
     "config": {
@@ -817,7 +822,8 @@
     "youCanSelectUpTo10": "最大で10個まで選択できます",
     "noDashboard": "選択されたダッシュボードはありません",
     "rightSelectDashboard": "右側のダッシュボードライブラリから選択してください",
-    "addBtn": "追加する"
+    "addBtn": "追加する",
+    "telemetryList": "テレメトリリスト"
   },
   "label": {
     "selectScene": "アプリケーションシナリオを選択してください",
