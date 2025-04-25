@@ -158,6 +158,6 @@ const sortKeys = (obj) => {
 };
 
 // 执行转换
-// jsonToCsv();  // 执行 JSON 转 CSV
+jsonToCsv();  // 执行 JSON 转 CSV
 // csvToJson(); // 执行 CSV 转 JSON
-jsonToExcel();
+// jsonToExcel();

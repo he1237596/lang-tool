@@ -9,7 +9,8 @@ const xlsx = require('xlsx');
 const languages = ["zh-CN", "zh-Hant", "en-US", "es", "fr", "it", "ja", "kr"];
 const inputPath = path.resolve(__dirname, './source');
 const outputPath = path.resolve(process.cwd(), './src/output');
-
+const chardet = require('chardet')
+const iconv = require('iconv-lite')
 // 展平嵌套对象的方法
 const flattenObject = (obj, parent = '', res = {}) => {
     for (let key in obj) {
@@ -65,7 +66,10 @@ function toCamelCase(text) {
 const csvToJson = () => {
     const results = [];
     fs.ensureDirSync(outputPath)
-    fs.createReadStream(path.join(outputPath, 'translations.csv'))
+    const csvPath = path.join(outputPath, 'translations.csv')
+    const encoding = chardet.detectFileSync(csvPath) || 'utf-8'
+    fs.createReadStream(csvPath)
+        .pipe(iconv.decodeStream(encoding))
         .pipe(csv())
         .on('data', (data) => results.push(data))
         .on('end', () => {

@@ -1,3 +1,4 @@
 /node_modules/
 /temp
+# 忽略/src/temp.json
 /src/temp.json
