@@ -5,10 +5,12 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "csv2json": "node ./src/csv2json",
     "2json": "npm run csv2json",
+    "2csv": "npm run json2csv",
+    "csv2json": "node ./src/csv2json",
     "json2csv": "node ./src/json2csv",
-    "2csv": "npm run json2csv"
+    "json2excel": "node ./src/json2excel",
+    "excel2json": "node ./src/csv2json"
   },
   "keywords": [],
   "author": "",
