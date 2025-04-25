@@ -17,7 +17,8 @@ const excelToCsv = (excelPath, csvPath, sheetName = '') => {
   const csvContent = xlsx.utils.sheet_to_csv(sheet);
 
   // 写入 GBK/GB18030 编码的 CSV
-  const gbkBuffer = iconv.encode(csvContent, 'gb18030');
+  // const gbkBuffer = iconv.encode(csvContent, 'gb18030');
+  const gbkBuffer = iconv.encode(csvContent, 'utf-8');
   fs.writeFileSync(csvPath, gbkBuffer);
   console.log(`✅ Excel 转 CSV 完成：${csvPath}`);
 };

@@ -8,7 +8,7 @@
   "auth.emailInvalid": "Email invalid",
   "auth.nicknameAlreadyInUse": "Nickname already in use",
   "auth.relogin.PleaseProvideYourIdentityDueToLoginInfoExpired": "Please provide your identity due to login Info expired",
-  "auth.relogin.email": "Email1",
+  "auth.relogin.email": "Email",
   "auth.relogin.logout": "Logout",
   "auth.relogin.password": "Password",
   "auth.relogin.verify": "Verify",

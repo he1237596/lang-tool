@@ -135,7 +135,7 @@
   "devices.base.mechanical.tooltip.mechanicalInertia": "增加转向时的重量感，数值越大，在驾驶时会感觉方向盘更重。",
   "devices.base.mechanical.tooltip.mechanicalSpring": "增加转向时的回中力，转向角度越大，回中力越大。不建议在模拟游戏中开启此项。",
   "devices.base.mechanical.tooltip.slowrate": "转矩变化率用于调节系统力反馈信号的动态响应速度(即Slew Rate)，通过控制信号变化的速率优化力反馈的平滑性和实时性。数值越高 力回馈越平滑 柔顺, 适用于过滤路肩和不平的颠簸路面等其他效过于强烈的游戏, 但不影响抓地感知和细节(0=无限制)",
-  "devices.base.mechanical.tooltip.staticforce_reduce": "对于大扭矩基座，在转向的时候，可以减少扭矩使驾驶更轻松，同时加强ffb效果的细节",
+  "devices.base.mechanical.tooltip.staticforce_reduce": "减弱弯道中持续的力矩但不会影响手感和路面细节",
   "devices.base.mechanical.tooltip.torqueLimit": "为基座设定最大输出扭矩，设定扭矩之下的所有力回馈细节都将保留，超过的部分将被裁切。对于大扭矩基座，通过限制扭矩大小，能够在不损失正常驾驶力回馈表现的同时，裁切掉撞车或失控时越过峰值的输出，有一定防打手的作用。",
   "devices.base.mechanical.torqueLimit": "扭矩限制",
   "devices.base.ringLight.breakingAngle": "刹车角度",
