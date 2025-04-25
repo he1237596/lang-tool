@@ -76,11 +76,15 @@ const csvToJson = () => {
             languages.forEach(lang => {
                 const translation = {};
                 results.forEach(row => {
-                    // if (row[lang]) {
+                    let rowKey = row.key;
+                    if (!rowKey) {
+                        console.log('key 不存在：', rowKey, '原始：', row[lang], '语言：', lang);
+                        // rowKey = toCamelCase(row['zh-CN'] || row['en-US'])
+                    } else {
                         translation[row.key] = row[lang];
                         // const unflattenedData = unflattenObject({ [row.key]: row[lang] });
                         // Object.assign(translation, unflattenedData);
-                    // }
+                    }
                 });
                 const sortedTranslation = sortKeys(translation);
                 fs.ensureFileSync(path.join(outputPath, `/json/${lang}.json`));

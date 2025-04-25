@@ -115,10 +115,8 @@ const excelToJson = () => {
             if (!rowKey) {
                 // console.log(row)
                 console.log('key 不存在：', rowKey, '转换后：', toCamelCase(row['zh-CN'] || row['en-US']), '原始：', row[lang], '语言：', lang);
-                rowKey = toCamelCase(row['zh-CN'] || row['en-US'])
-            }
-
-            if (rowKey) {
+                // rowKey = toCamelCase(row['zh-CN'] || row['en-US'])
+            } else {
                translation[rowKey] = row[lang] || '';
                if(!row.key) {
                 console.log(row[lang])
